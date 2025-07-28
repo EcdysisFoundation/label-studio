@@ -44,7 +44,7 @@ services:
     #      - LOG_LEVEL=DEBUG
     volumes:
       - ./mydata:/label-studio/data:rw
-      - /Users/michaelawilson/repos/stitcher/media:/stitchermedia
+      - /pool1/srv/stitcher/media:/stitchermedia
     command: label-studio-uwsgi
 
   db:
