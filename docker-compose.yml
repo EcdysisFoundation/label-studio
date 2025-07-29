@@ -17,6 +17,7 @@ services:
     volumes:
       - ./mydata:/label-studio/data:rw
       - ./deploy/nginx/certs:/certs:ro
+      - /pool1/srv/stitcher/media:/label-studio/stitchermedia:rw
     #   Optional: Override nginx default conf
     #      - ./deploy/my.conf:/etc/nginx/nginx.conf
     command: nginx
@@ -41,10 +42,11 @@ services:
       - LABEL_STUDIO_HOST=${LABEL_STUDIO_HOST:-}
       - JSON_LOG=1
       - LABEL_STUDIO_LOCAL_FILES_SERVING_ENABLED=true
+      - LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=/label-studio
     #      - LOG_LEVEL=DEBUG
     volumes:
       - ./mydata:/label-studio/data:rw
-      - /pool1/srv/stitcher/media:/stitchermedia
+      - /pool1/srv/stitcher/media:/label-studio/stitchermedia:rw
     command: label-studio-uwsgi
 
   db:
