@@ -2,6 +2,10 @@ services:
   nginx:
     build: .
     image: heartexlabs/label-studio:latest
+    deploy:
+      resources:
+        limits:
+          memory: 9g
     restart: unless-stopped
     ports:
       - "8080:8085"
@@ -26,6 +30,10 @@ services:
     tty: true
     build: .
     image: heartexlabs/label-studio:latest
+    deploy:
+      resources:
+        limits:
+          memory: 9g
     restart: unless-stopped
     expose:
       - "8000"
@@ -49,6 +57,10 @@ services:
 
   db:
     image: pgautoupgrade/pgautoupgrade:13-alpine
+    deploy:
+      resources:
+        limits:
+          memory: 9g
     hostname: db
     restart: unless-stopped
     # Optional: Enable TLS on PostgreSQL
