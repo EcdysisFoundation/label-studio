@@ -50,6 +50,7 @@ services:
       - JSON_LOG=1
       - LABEL_STUDIO_LOCAL_FILES_SERVING_ENABLED=true
       - LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=/label-studio
+      - UWSGI_WORKER_HARAKIRI=0
     #      - LOG_LEVEL=DEBUG
     volumes:
       - ./mydata:/label-studio/data:rw
