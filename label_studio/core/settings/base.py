@@ -853,6 +853,8 @@ if ENABLE_CSP := get_bool_env('ENABLE_CSP', True):
         "'self'",
         "'report-sample'",
         'data:',
+        'https://ecdysis-public.s3.us-east-2.amazonaws.com',
+        'https://ecdysis-media.s3.us-east-2.amazonaws.com',
         'https://*.google-analytics.com',
         'https://*.googletagmanager.com',
         'https://*.google.com',
@@ -860,6 +862,8 @@ if ENABLE_CSP := get_bool_env('ENABLE_CSP', True):
     CSP_CONNECT_SRC = (
         "'self'",
         "'report-sample'",
+        'https://ecdysis-public.s3.us-east-2.amazonaws.com',
+        'https://ecdysis-media.s3.us-east-2.amazonaws.com',
         'https://*.google-analytics.com',
         'https://*.analytics.google.com',
         'https://analytics.google.com',
@@ -873,6 +877,8 @@ if ENABLE_CSP := get_bool_env('ENABLE_CSP', True):
     CSP_INCLUDE_NONCE_IN = ['script-src', 'default-src']
 
     MIDDLEWARE.append('core.middleware.HumanSignalCspMiddleware')
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 CLOUD_STORAGE_CHECK_FOR_RECORDS_PAGE_SIZE = get_env('CLOUD_STORAGE_CHECK_FOR_RECORDS_PAGE_SIZE', 10000)
 CLOUD_STORAGE_CHECK_FOR_RECORDS_TIMEOUT = get_env('CLOUD_STORAGE_CHECK_FOR_RECORDS_TIMEOUT', 60)

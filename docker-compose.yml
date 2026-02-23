@@ -2,6 +2,10 @@ services:
   nginx:
     build: .
     image: heartexlabs/label-studio:latest
+    deploy:
+      resources:
+        limits:
+          memory: 9g
     restart: unless-stopped
     ports:
       - "8080:8085"
@@ -29,6 +33,10 @@ services:
     tty: true
     build: .
     image: heartexlabs/label-studio:latest
+    deploy:
+      resources:
+        limits:
+          memory: 9g
     restart: unless-stopped
     expose:
       - "8000"
@@ -43,6 +51,10 @@ services:
       - POSTGRE_HOST=db
       - LABEL_STUDIO_HOST=${LABEL_STUDIO_HOST:-}
       - JSON_LOG=1
+      - LABEL_STUDIO_LOCAL_FILES_SERVING_ENABLED=true
+      - LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=/label-studio
+      - UWSGI_WORKER_HARAKIRI=0
+      - UWSGI_PROCESSES=16
     #      - LOG_LEVEL=DEBUG
     volumes:
       - ./mydata:/label-studio/data:rw
@@ -50,6 +62,10 @@ services:
 
   db:
     image: pgautoupgrade/pgautoupgrade:13-alpine
+    deploy:
+      resources:
+        limits:
+          memory: 9g
     hostname: db
     restart: unless-stopped
     # Optional: Enable TLS on PostgreSQL
@@ -62,6 +78,8 @@ services:
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_USER=postgres
+    ports:
+      - "5433:5432"
     volumes:
       - ${POSTGRES_DATA_DIR:-./postgres-data}:/var/lib/postgresql/data
       - ./deploy/pgsql/certs:/var/lib/postgresql/certs:ro
